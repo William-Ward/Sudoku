@@ -34,11 +34,14 @@ public class SudokuBoardTest {
         assertEquals(8, board.getCell(3,3));
         assertTrue(board.setCell(0,3,3));
         assertEquals(0, board.getCell(3,3));
+        assertTrue(1 == board.getCell(3,3));
+        System.out.println(board.getCell(3,3));
         assertTrue(!board.setCell(10,3,3)); 
     }
 
     public void getRemainingOfNumberTest(){
-        assertEquals(1, board.getRemainingOfNumber(1));
+        assertEquals(5, board.getRemainingOfNumber(1));
+        assertEquals(3, board.getRemainingOfNumber(4));
     }
 
     public void getCellTest(){

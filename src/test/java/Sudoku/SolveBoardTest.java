@@ -22,7 +22,7 @@ public class SolveBoardTest {
         solve.populateDiagonalCubes();
         assertNotEquals(cubeZeros, solve.board.getCube(0, 0));
         assertNotEquals(solve.board.getCube(6,6), solve.board.getCube(3, 3));
-        // solve.board.printBoard();
+        solve.board.printBoard();
     }
 
     public void shuffleArrayTest(){

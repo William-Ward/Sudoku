@@ -37,7 +37,7 @@ public class SudokuBoard {
     }
 
     public int getRemainingOfNumber(int numToFind){
-        return
+        return 0;
     }
 
     public ArrayList<Integer> getCube(int rowStart, int colStart){
