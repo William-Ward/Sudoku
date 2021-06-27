@@ -15,12 +15,30 @@ public class SudokuBoardTest {
     }
 
     @Test
+    public void constructorTest(){
+        SudokuBoard blankBoard = new SudokuBoard();
+        assertEquals(0, blankBoard.getCell(8,8));
+    }
+    public void setCubeTest(){
+        ArrayList<Integer> cube66 = new ArrayList<Integer>(Arrays.asList(4,1,2,6,0,0,9,3,0));
+        ArrayList<Integer> allZeros = new ArrayList<Integer>(Arrays.asList(0,0,0,0,0,0,0,0,0));
+        assertEquals(cube66, board.getCube(6,6));
+
+        assertTrue(board.setCube(allZeros, 6, 6));
+        assertEquals(allZeros, board.getCube(6,6));
+        assertTrue(board.setCube(cube66, 6, 6));
+        assertEquals(cube66, board.getCube(6,6));
+    }
 
     public void setCellTest(){
         assertEquals(8, board.getCell(3,3));
         assertTrue(board.setCell(0,3,3));
         assertEquals(0, board.getCell(3,3));
         assertTrue(!board.setCell(10,3,3)); 
+    }
+
+    public void getRemainingOfNumberTest(){
+        assertEquals(1, board.getRemainingOfNumber(1));
     }
 
     public void getCellTest(){
@@ -47,17 +65,6 @@ public class SudokuBoardTest {
         assertEquals(column1, board.getColumn(1)); 
         ArrayList<Integer> column2 = new ArrayList<Integer>(Arrays.asList(0,7,0,3,2,4,0,0,0));
         assertEquals(column2, board.getColumn(2)); 
-    }
-
-    public void shuffleArrayTest(){
-        ArrayList<Integer> row = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9));
-        ArrayList<Integer> originalRow = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9));
-        assertNotSame(originalRow, SudokuBoard.shuffleArray(row));
-    }
-
-    public void getRandomNumberTest(){
-        assertTrue(SudokuBoard.getRandomNumber(1,9) <= 9 && SudokuBoard.getRandomNumber(1,9) > 0); 
-        assertEquals(4, SudokuBoard.getRandomNumber(4,5));
     }
 
 } 

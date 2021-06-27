@@ -1,14 +1,11 @@
 package Sudoku;
 
+// import java.util.Arrays;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Collections;
-
 
 public class SudokuBoard {
     static final int BLANK_SQUARE = 0;
-    static final int BLOCK_SIZE = 9;
+    static final int BOARD_SIZE = 9;
     public int[][] board = new int[9][9];
 
     SudokuBoard(){ }
@@ -27,6 +24,22 @@ public class SudokuBoard {
     public int getCell(int row, int col){
         return board[row][col];
     }
+
+    public boolean setCube(ArrayList<Integer> cube, int rowStart, int colStart){
+        int counter = 0;
+        for(int row = rowStart; row < rowStart+3; row = row + 1){
+            for(int col = colStart; col < colStart + 3; col = col + 1){
+                board[row][col] = cube.get(counter);
+                counter++;
+            }
+        }
+        return true; 
+    }
+
+    public int getRemainingOfNumber(int numToFind){
+        return
+    }
+
     public ArrayList<Integer> getCube(int rowStart, int colStart){
         ArrayList<Integer> cube = new ArrayList<Integer>(); 
         for(int row = rowStart; row < rowStart+3; row = row + 1){
@@ -39,7 +52,7 @@ public class SudokuBoard {
 
     public ArrayList<Integer> getRow(int row){
         ArrayList<Integer> returnrow = new ArrayList<Integer>(); 
-        for(int col = 0; col < BLOCK_SIZE; col = col + 1){
+        for(int col = 0; col < BOARD_SIZE; col = col + 1){
             returnrow.add(board[row][col]);
         }
         return returnrow;
@@ -47,19 +60,20 @@ public class SudokuBoard {
 
     public ArrayList<Integer> getColumn(int col){
         ArrayList<Integer> column = new ArrayList<Integer>();
-        for(int row = 0; row < BLOCK_SIZE; row = row + 1){
+        for(int row = 0; row < BOARD_SIZE; row = row + 1){
             column.add(board[row][col]);
         }
         return column;
     }
 
-    public static ArrayList<Integer> shuffleArray(ArrayList<Integer> row){ 
-        Collections.shuffle(row);
-        return row;
-    }
-
-    public static int getRandomNumber(int min, int max) { 
-        return new Random().nextInt(max - min) + min;
+    public void printBoard(){
+        for(int row = 0; row < BOARD_SIZE; row++){
+            for(int col = 0; col < BOARD_SIZE; col++){
+                System.out.print(board[row][col]);
+                System.out.print(" ");
+            }
+            System.out.println(" ");
+        }
     }
 
 }
