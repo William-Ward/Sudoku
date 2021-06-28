@@ -27,7 +27,7 @@ public class SudokuBoard {
 
     public boolean setCube(ArrayList<Integer> cube, int rowStart, int colStart){
         int counter = 0;
-        for(int row = rowStart; row < rowStart+3; row = row + 1){
+        for(int row = rowStart; row < rowStart + 3; row = row + 1){
             for(int col = colStart; col < colStart + 3; col = col + 1){
                 board[row][col] = cube.get(counter);
                 counter++;
@@ -37,7 +37,16 @@ public class SudokuBoard {
     }
 
     public int getRemainingOfNumber(int numToFind){
-        return 0;
+        int count = 0;
+        for(int row = 0; row < BOARD_SIZE; row++){
+            for(int col = 0; col < BOARD_SIZE; col++){
+                if(board[row][col] == numToFind){
+                    count++;
+                    break;
+                }
+            }
+        }
+        return BOARD_SIZE - count;
     }
 
     public ArrayList<Integer> getCube(int rowStart, int colStart){

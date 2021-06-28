@@ -5,16 +5,17 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Collections;
 
-// TODO 
-
 public class SolveBoard {
     SudokuBoard board;
-    ArrayList<Integer> templateRow = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9));
     SolveBoard(){
         board = new SudokuBoard();
     }
+    SolveBoard(SudokuBoard newboard){
+        board = newboard;
+    }
 
   public void populateDiagonalCubes(){ 
+        ArrayList<Integer> templateRow = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9));
         board.setCube(SolveBoard.shuffleArray(templateRow), 0, 0); 
         board.setCube(SolveBoard.shuffleArray(templateRow), 3, 3); 
         board.setCube(SolveBoard.shuffleArray(templateRow), 6, 6); 
@@ -23,6 +24,20 @@ public class SolveBoard {
     public static ArrayList<Integer> shuffleArray(ArrayList<Integer> row){ 
         Collections.shuffle(row);
         return row;
+    }
+
+    public ArrayList<Integer> findPossibleInCell(int row, int col){ 
+        ArrayList<Integer> foundPossible = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9)); 
+        return foundPossible;
+    }
+
+    public ArrayList<Integer> findPossibleInArrayList(ArrayList<Integer> currentPossible, ArrayList<Integer> fromList){ 
+        for(Integer e : fromList){
+            if(e != 0){
+                currentPossible.remove(e);
+            }
+        }
+        return currentPossible;
     }
 
     public static boolean rowIsComplete(ArrayList<Integer> row){
