@@ -25,10 +25,13 @@ public class SudokuBoard {
         return board[row][col];
     }
 
-    public boolean setCube(ArrayList<Integer> cube, int rowStart, int colStart){
+    public boolean setCube(ArrayList<Integer> cube, int rowNum, int colNum){
+        rowNum = normalizeRowOrCol(rowNum);
+        colNum = normalizeRowOrCol(colNum);
         int counter = 0;
-        for(int row = rowStart; row < rowStart + 3; row = row + 1){
-            for(int col = colStart; col < colStart + 3; col = col + 1){
+
+        for(int row = rowNum; row < rowNum + 3; row = row + 1){
+            for(int col = colNum; col < colNum + 3; col = col + 1){
                 board[row][col] = cube.get(counter);
                 counter++;
             }
@@ -36,6 +39,7 @@ public class SudokuBoard {
         return true; 
     }
 
+    // find how many occurences of a given number are left on the board
     public int getRemainingOfNumber(int numToFind){
         int count = 0;
         for(int row = 0; row < BOARD_SIZE; row++){
@@ -49,10 +53,20 @@ public class SudokuBoard {
         return BOARD_SIZE - count;
     }
 
-    public ArrayList<Integer> getCube(int rowStart, int colStart){
+
+    public static int normalizeRowOrCol(int num){
+        if(num < 6 && num >= 3){ return 3; }
+        if(num >= 6){ return 6; } 
+        return 0;
+    }
+
+    public ArrayList<Integer> getCube(int rowNum, int colNum){
+        rowNum = normalizeRowOrCol(rowNum);
+        colNum = normalizeRowOrCol(colNum);
         ArrayList<Integer> cube = new ArrayList<Integer>(); 
-        for(int row = rowStart; row < rowStart+3; row = row + 1){
-            for(int col = colStart; col < colStart + 3; col = col + 1){
+
+        for(int row = rowNum; row < rowNum+3; row = row + 1){
+            for(int col = colNum; col < colNum + 3; col = col + 1){
                 cube.add(board[row][col]); 
             }
         }

@@ -41,15 +41,25 @@ public class SudokuBoardTest {
     }
 
     @Test
+    public void getCellTest(){
+        assertEquals(8, board.getCell(3,3));
+        assertEquals(3, board.getCell(0,0));
+    }
+
+    @Test
     public void getRemainingOfNumberTest(){
         assertEquals(5, board.getRemainingOfNumber(1));
         assertEquals(3, board.getRemainingOfNumber(4));
     }
 
     @Test
-    public void getCellTest(){
-        assertEquals(8, board.getCell(3,3));
-        assertEquals(3, board.getCell(0,0));
+    public void normalizeRowColTest(){
+        assertEquals(0, SudokuBoard.normalizeRowOrCol(0));
+        assertEquals(3, SudokuBoard.normalizeRowOrCol(3));
+        assertEquals(6, SudokuBoard.normalizeRowOrCol(6));
+        assertEquals(0, SudokuBoard.normalizeRowOrCol(2));
+        assertEquals(6, SudokuBoard.normalizeRowOrCol(12));
+        assertEquals(0, SudokuBoard.normalizeRowOrCol(-1));
     }
 
     @Test

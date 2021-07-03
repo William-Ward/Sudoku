@@ -15,14 +15,16 @@ public class SolveBoardTest {
         solve = new SolveBoard();
     }
 
+    public void findPossibleInEveryCellTest(){
+
+    }
+
     @Test
     public void findPossibleInCellTest(){ 
         SolveBoard localSolve = new SolveBoard(new SudokuBoard(BoardExample.example1));
-        int row = 0, col = 2;
-        ArrayList<Integer> possibleInCell = new ArrayList<Integer>(Arrays.asList(2,9));
-        assertEquals(possibleInCell, localSolve.findPossibleInCell(row, col));
-        possibleInCell = new ArrayList<Integer>(Arrays.asList(1,2));
-        assertEquals(possibleInCell, localSolve.findPossibleInCell(3, 4));
+        int row = 0, col = 2; 
+        assertEquals(Arrays.asList(9), localSolve.findPossibleInCell(row, col));
+        assertEquals(Arrays.asList(1,2), localSolve.findPossibleInCell(3, 4));
     }
 
     @Test
