@@ -26,15 +26,15 @@ public class SaveListTest {
     }
 
     @Test
-    public void getList(){
+    public void getCellPossibleListTest(){
         ArrayList<Integer> cell00 = new  ArrayList<Integer>(Arrays.asList(0,0,0));
         ArrayList<Integer> cell88 = new  ArrayList<Integer>(Arrays.asList(8,8,8));
         savelist.addList(0, 0, cell00);
         savelist.addList(8, 8, cell88); 
-        assertEquals(cell00, savelist.getList(0,0));
-        assertEquals(cell88, savelist.getList(8,8)); 
-        assertEquals(null, savelist.getList(8,9)); 
-        assertEquals(null, savelist.getList(-1,-1)); 
+        assertEquals(cell00, savelist.getCellPossibleList(0,0));
+        assertEquals(cell88, savelist.getCellPossibleList(8,8)); 
+        assertEquals(null, savelist.getCellPossibleList(8,9)); 
+        assertEquals(null, savelist.getCellPossibleList(-1,-1)); 
     }
 
     @Test

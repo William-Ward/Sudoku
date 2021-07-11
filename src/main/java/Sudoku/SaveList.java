@@ -15,7 +15,7 @@ public class SaveList {
         }
     }
 
-    public ArrayList<Integer> getList(int row, int col){
+    public ArrayList<Integer> getCellPossibleList(int row, int col){
         int index = getIndexFromRowCol(row, col);
         if(index != -1){
             return thisList.get(getIndexFromRowCol(row, col)); 
