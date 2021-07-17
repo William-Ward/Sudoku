@@ -15,28 +15,39 @@ public class SolveBoardTest {
         solve = new SolveBoard();
     }
 
-    public void findPossibleInEveryCellTest(){
+    @Test
+    public void solveTest(){
+        SolveBoard solveExample1 = new SolveBoard(new SudokuBoard(BoardExample.example1));
+        assertTrue(solveExample1.board.isSolved());
+    }
 
+    @Test
+    public void findPossibleInBoardTest(){
+        SolveBoard solveExample1 = new SolveBoard(new SudokuBoard(BoardExample.example1));
+        SaveList savelist = solveExample1.findPossibleInBoard();
+        assertTrue(savelist.getList(0,0).isEmpty());
+        assertEquals(Arrays.asList(1,2), savelist.getList(3,4)); 
+        // savelist.printList();
     }
 
     @Test
     public void findPossibleInCellTest(){ 
-        SolveBoard localSolve = new SolveBoard(new SudokuBoard(BoardExample.example1));
-        int row = 0, col = 2; 
-        assertEquals(Arrays.asList(9), localSolve.findPossibleInCell(row, col));
-        assertEquals(Arrays.asList(1,2), localSolve.findPossibleInCell(3, 4));
+        SolveBoard solveExample1 = new SolveBoard(new SudokuBoard(BoardExample.example1));
+        assertEquals(Arrays.asList(9), solveExample1.findPossibleInCell(0,2));
+        assertEquals(Arrays.asList(1,2), solveExample1.findPossibleInCell(3, 4));
+        assertEquals(new ArrayList<Integer>(), solveExample1.findPossibleInCell(0,0));
     }
 
     @Test
     public void findPossibleInArrayListTest(){
-        SolveBoard localSolve = new SolveBoard(new SudokuBoard(BoardExample.example1));
+        SolveBoard solveExample1 = new SolveBoard(new SudokuBoard(BoardExample.example1));
         ArrayList<Integer> arraylist = new ArrayList<Integer>(Arrays.asList(3,8,0, 1,7,0, 5,6,4));
         ArrayList<Integer> currentList = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9));
         ArrayList<Integer> possibleInCell = new ArrayList<Integer>(Arrays.asList(2,9));
-        assertEquals(possibleInCell, localSolve.findPossibleInArrayList(currentList, arraylist));
+        assertEquals(possibleInCell, solveExample1.findPossibleInArrayList(currentList, arraylist));
         assertEquals(Arrays.asList(2,9), currentList);
         arraylist = new ArrayList<Integer>(Arrays.asList(0,7,0,3,2,4,0,0,0)); 
-        assertEquals(Arrays.asList(9), localSolve.findPossibleInArrayList(currentList, arraylist));
+        assertEquals(Arrays.asList(9), solveExample1.findPossibleInArrayList(currentList, arraylist));
     }
 
     @Test

@@ -19,6 +19,12 @@ public class SudokuBoardTest {
         SudokuBoard blankBoard = new SudokuBoard();
         assertEquals(0, blankBoard.getCell(8,8));
     }
+
+    @Test
+    public void isSolvedTest(){
+
+    }
+
     @Test
     public void setCubeTest(){
         ArrayList<Integer> cube66 = new ArrayList<Integer>(Arrays.asList(4,1,2,6,0,0,9,3,0));
@@ -53,13 +59,13 @@ public class SudokuBoardTest {
     }
 
     @Test
-    public void normalizeRowColTest(){
-        assertEquals(0, SudokuBoard.normalizeRowOrCol(0));
-        assertEquals(3, SudokuBoard.normalizeRowOrCol(3));
-        assertEquals(6, SudokuBoard.normalizeRowOrCol(6));
-        assertEquals(0, SudokuBoard.normalizeRowOrCol(2));
-        assertEquals(6, SudokuBoard.normalizeRowOrCol(12));
-        assertEquals(0, SudokuBoard.normalizeRowOrCol(-1));
+    public void setToCubeBeginning(){
+        assertEquals(0, SudokuBoard.setToCubeBeginning(0));
+        assertEquals(3, SudokuBoard.setToCubeBeginning(3));
+        assertEquals(6, SudokuBoard.setToCubeBeginning(6));
+        assertEquals(0, SudokuBoard.setToCubeBeginning(2));
+        assertEquals(6, SudokuBoard.setToCubeBeginning(12));
+        assertEquals(0, SudokuBoard.setToCubeBeginning(-1));
     }
 
     @Test
@@ -89,17 +95,17 @@ public class SudokuBoardTest {
 } 
 
 class BoardExample {
+    static int[][] example1 = {
+        {3,8,0, 1,7,0, 5,6,4},
+        {0,1,7, 0,5,0, 0,8,9},
+        {6,0,0, 0,3,8, 0,0,0},
 
-    static int[][] example1 = {{3,8,0, 1,7,0, 5,6,4},
-                               {0,1,7, 0,5,0, 0,8,9},
-                               {6,0,0, 0,3,8, 0,0,0},
+        {9,0,3, 8,0,0, 0,4,6},
+        {0,0,2, 0,0,6, 0,5,0},
+        {1,6,4, 0,0,0, 0,9,0},
 
-                               {9,0,3, 8,0,0, 0,4,6},
-                               {0,0,2, 0,0,6, 0,5,0},
-                               {1,6,4, 0,0,0, 0,9,0},
-
-                               {5,0,0, 7,6,3, 4,1,2},
-                               {4,3,0, 2,0,9, 6,0,0},
-                               {0,2,0, 5,4,0, 9,3,0}};
-
+        {5,0,0, 7,6,3, 4,1,2},
+        {4,3,0, 2,0,9, 6,0,0},
+        {0,2,0, 5,4,0, 9,3,0}
+    };
 } 

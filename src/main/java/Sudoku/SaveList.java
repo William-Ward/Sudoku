@@ -15,16 +15,16 @@ public class SaveList {
         }
     }
 
-    public ArrayList<Integer> getCellPossibleList(int row, int col){
-        int index = getIndexFromRowCol(row, col);
+    public ArrayList<Integer> getList(int row, int col){
+        int index = get1dIndexFromRowCol(row, col);
         if(index != -1){
-            return thisList.get(getIndexFromRowCol(row, col)); 
+            return thisList.get(index); 
         }
         return null;
     }
 
     public boolean addList(int row, int col, ArrayList<Integer> insertList){
-        int index = getIndexFromRowCol(row, col);
+        int index = get1dIndexFromRowCol(row, col);
         if(index != -1){
             thisList.set(index, insertList);
             return true;
@@ -32,7 +32,7 @@ public class SaveList {
         return false;
     }
 
-    public int getIndexFromRowCol(int row, int col){
+    public int get1dIndexFromRowCol(int row, int col){
         int index = row*BOARD_SIZE+col;
         if(index >= 0 && index <= 80){
             return index;
@@ -42,5 +42,9 @@ public class SaveList {
 
     public int getSize(){
         return thisList.size();
+    }
+
+    public void printList(){
+        System.out.println(thisList);
     }
 }

@@ -26,8 +26,8 @@ public class SudokuBoard {
     }
 
     public boolean setCube(ArrayList<Integer> cube, int rowNum, int colNum){
-        rowNum = normalizeRowOrCol(rowNum);
-        colNum = normalizeRowOrCol(colNum);
+        rowNum = setToCubeBeginning(rowNum);
+        colNum = setToCubeBeginning(colNum);
         int counter = 0;
 
         for(int row = rowNum; row < rowNum + 3; row = row + 1){
@@ -54,15 +54,15 @@ public class SudokuBoard {
     }
 
 
-    public static int normalizeRowOrCol(int num){
+    public static int setToCubeBeginning(int num){
         if(num < 6 && num >= 3){ return 3; }
         if(num >= 6){ return 6; } 
         return 0;
     }
 
     public ArrayList<Integer> getCube(int rowNum, int colNum){
-        rowNum = normalizeRowOrCol(rowNum);
-        colNum = normalizeRowOrCol(colNum);
+        rowNum = setToCubeBeginning(rowNum);
+        colNum = setToCubeBeginning(colNum);
         ArrayList<Integer> cube = new ArrayList<Integer>(); 
 
         for(int row = rowNum; row < rowNum+3; row = row + 1){
@@ -97,6 +97,10 @@ public class SudokuBoard {
             }
             System.out.println(" ");
         }
+    }
+
+    public int getBoardSize(){
+        return BOARD_SIZE;
     }
 
 }

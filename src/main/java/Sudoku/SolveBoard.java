@@ -7,22 +7,33 @@ import java.util.Collections;
 
 public class SolveBoard {
     SudokuBoard board;
-    SolveBoard()                    { board = new SudokuBoard(); }
-    SolveBoard(SudokuBoard newboard){ board = newboard; }
+    SaveList scratchList = new SaveList();
+    SolveBoard(){
+        board = new SudokuBoard();
+    }
+    SolveBoard(SudokuBoard newboard){
+        board = newboard;
+    }
 
-  public void populateDiagonalCubes(){ 
-        ArrayList<Integer> templateRow = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9));
-        board.setCube(SolveBoard.shuffleArray(templateRow), 0, 0); 
-        board.setCube(SolveBoard.shuffleArray(templateRow), 3, 3); 
-        board.setCube(SolveBoard.shuffleArray(templateRow), 6, 6); 
+    public SaveList findPossibleInBoard(){
+        int boardSize = board.getBoardSize();
+        for(int row = 0; row < boardSize; row = row + 1){
+            for(int col = 0; col < boardSize; col = col + 1){
+                scratchList.addList(row, col, findPossibleInCell(row, col));
+            } 
+        }
+        return scratchList;
     }
 
     public ArrayList<Integer> findPossibleInCell(int row, int col){ 
         ArrayList<Integer> foundPossible = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9)); 
-        findPossibleInArrayList(foundPossible, board.getRow(row));
-        findPossibleInArrayList(foundPossible, board.getColumn(col));
-        findPossibleInArrayList(foundPossible, board.getCube(row, col));
-        return foundPossible;
+        if(board.getCell(row, col) == 0){
+            findPossibleInArrayList(foundPossible, board.getRow(row));
+            findPossibleInArrayList(foundPossible, board.getColumn(col));
+            findPossibleInArrayList(foundPossible, board.getCube(row, col));
+            return foundPossible;
+        }
+        return new ArrayList<Integer>();
     }
 
     public ArrayList<Integer> findPossibleInArrayList(
@@ -33,6 +44,13 @@ public class SolveBoard {
             }
         }
         return currentPossible;
+    }
+
+  public void populateDiagonalCubes(){ 
+        ArrayList<Integer> templateRow = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9));
+        board.setCube(SolveBoard.shuffleArray(templateRow), 0, 0); 
+        board.setCube(SolveBoard.shuffleArray(templateRow), 3, 3); 
+        board.setCube(SolveBoard.shuffleArray(templateRow), 6, 6); 
     }
 
     public static boolean rowIsComplete(ArrayList<Integer> row){
