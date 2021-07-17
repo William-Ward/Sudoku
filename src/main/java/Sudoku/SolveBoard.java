@@ -19,31 +19,10 @@ public class SolveBoard {
         int boardSize = board.getBoardSize();
         for(int row = 0; row < boardSize; row = row + 1){
             for(int col = 0; col < boardSize; col = col + 1){
-                scratchList.addList(row, col, findPossibleInCell(row, col));
+                scratchList.addList(row, col, board.findPossibleInCell(row, col));
             } 
         }
         return scratchList;
-    }
-
-    public ArrayList<Integer> findPossibleInCell(int row, int col){ 
-        ArrayList<Integer> foundPossible = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9)); 
-        if(board.getCell(row, col) == 0){
-            findPossibleInArrayList(foundPossible, board.getRow(row));
-            findPossibleInArrayList(foundPossible, board.getColumn(col));
-            findPossibleInArrayList(foundPossible, board.getCube(row, col));
-            return foundPossible;
-        }
-        return new ArrayList<Integer>();
-    }
-
-    public ArrayList<Integer> findPossibleInArrayList(
-           ArrayList<Integer> currentPossible, ArrayList<Integer> fromList){ 
-        for(Integer e : fromList){
-            if(e != 0){
-                currentPossible.remove(e);
-            }
-        }
-        return currentPossible;
     }
 
   public void populateDiagonalCubes(){ 

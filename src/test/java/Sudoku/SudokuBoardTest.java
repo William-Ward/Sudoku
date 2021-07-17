@@ -8,104 +8,49 @@ import org.junit.Test;
 import org.junit.Before;
 
 public class SudokuBoardTest {
-    SudokuBoard board;
+    SudokuBoard example1Board;
+    SudokuBoard notValidBoard;
+
     @Before
     public void initialize(){
-        board = new SudokuBoard(BoardExample.example1);
+        this.example1Board = new SudokuBoard(BoardExample.example1);
+        this.notValidBoard = new SudokuBoard(BoardExample.example1notValid);
     }
 
     @Test
-    public void constructorTest(){
-        SudokuBoard blankBoard = new SudokuBoard();
-        assertEquals(0, blankBoard.getCell(8,8));
+    public void isCompleteTest(){
+        assertFalse(example1Board.isComplete());
+        assertTrue(new SudokuBoard(BoardExample.example1complete).isComplete());
     }
 
     @Test
-    public void isSolvedTest(){
-
+    public void findPossibleInCellTest(){ 
+        assertEquals(Arrays.asList(9), example1Board.findPossibleInCell(0,2));
+        assertEquals(Arrays.asList(1,2), example1Board.findPossibleInCell(3, 4));
+        assertEquals(new ArrayList<Integer>(), example1Board.findPossibleInCell(0,0));
     }
 
     @Test
-    public void setCubeTest(){
-        ArrayList<Integer> cube66 = new ArrayList<Integer>(Arrays.asList(4,1,2,6,0,0,9,3,0));
-        ArrayList<Integer> allZeros = new ArrayList<Integer>(Arrays.asList(0,0,0,0,0,0,0,0,0));
-        assertEquals(cube66, board.getCube(6,6));
-
-        assertTrue(board.setCube(allZeros, 6, 6));
-        assertEquals(allZeros, board.getCube(6,6));
-        assertTrue(board.setCube(cube66, 6, 6));
-        assertEquals(cube66, board.getCube(6,6));
+    public void findPossibleInListTest(){
+        ArrayList<Integer> arraylist = new ArrayList<Integer>(Arrays.asList(3,8,0, 1,7,0, 5,6,4));
+        ArrayList<Integer> currentList = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9));
+        ArrayList<Integer> possibleInCell = new ArrayList<Integer>(Arrays.asList(2,9));
+        assertEquals(possibleInCell, example1Board.findPossibleInList(currentList, arraylist));
+        assertEquals(Arrays.asList(2,9), currentList);
+        arraylist = new ArrayList<Integer>(Arrays.asList(0,7,0,3,2,4,0,0,0)); 
+        assertEquals(Arrays.asList(9), example1Board.findPossibleInList(currentList, arraylist));
     }
 
     @Test
-    public void setCellTest(){
-        assertEquals(8, board.getCell(3,3));
-        assertTrue(board.setCell(0,3,3));
-        assertEquals(0, board.getCell(3,3));
-        assertTrue(!board.setCell(10,3,3)); 
-        assertTrue(board.setCell(8,3,3));
+    public void isValidTest(){
+        assertTrue(example1Board.isValid());
+        assertFalse(notValidBoard.isValid());
     }
-
     @Test
-    public void getCellTest(){
-        assertEquals(8, board.getCell(3,3));
-        assertEquals(3, board.getCell(0,0));
+    public void isListValidTest(){
+        ArrayList<Integer> invalidList = new ArrayList<Integer>(Arrays.asList(4,1,2,6,0,6,9,3,0));
+        ArrayList<Integer> validList = new ArrayList<Integer>(Arrays.asList(4,1,2,6,0,0,9,3,0));
+        assertFalse(SudokuBoard.isListValid(invalidList));
+        assertTrue(SudokuBoard.isListValid(validList)); 
     }
-
-    @Test
-    public void getRemainingOfNumberTest(){
-        assertEquals(5, board.getRemainingOfNumber(1));
-        assertEquals(3, board.getRemainingOfNumber(4));
-    }
-
-    @Test
-    public void setToCubeBeginning(){
-        assertEquals(0, SudokuBoard.setToCubeBeginning(0));
-        assertEquals(3, SudokuBoard.setToCubeBeginning(3));
-        assertEquals(6, SudokuBoard.setToCubeBeginning(6));
-        assertEquals(0, SudokuBoard.setToCubeBeginning(2));
-        assertEquals(6, SudokuBoard.setToCubeBeginning(12));
-        assertEquals(0, SudokuBoard.setToCubeBeginning(-1));
-    }
-
-    @Test
-    public void getCubeTest(){
-        ArrayList<Integer> cube00 = new ArrayList<Integer>(Arrays.asList(3,8,0,0,1,7,6,0,0));
-        assertEquals(cube00, board.getCube(0, 0));
-        ArrayList<Integer> cube66 = new ArrayList<Integer>(Arrays.asList(4,1,2,6,0,0,9,3,0));
-        assertEquals(cube66, board.getCube(6, 6)); 
-    }
-
-    @Test
-    public void getRowTest(){
-        ArrayList<Integer> row0 = new ArrayList<Integer>(Arrays.asList(3,8,0, 1,7,0, 5,6,4));
-        assertEquals(row0, board.getRow(0)); 
-        ArrayList<Integer> row3 = new ArrayList<Integer>(Arrays.asList(9,0,3, 8,0,0, 0,4,6));
-        assertEquals(row3, board.getRow(3)); 
-    }
-    
-    @Test
-    public void getColumnTest(){
-        ArrayList<Integer> column1 = new ArrayList<Integer>(Arrays.asList(8,1,0,0,0,6,0,3,2));
-        assertEquals(column1, board.getColumn(1)); 
-        ArrayList<Integer> column2 = new ArrayList<Integer>(Arrays.asList(0,7,0,3,2,4,0,0,0));
-        assertEquals(column2, board.getColumn(2)); 
-    }
-
-} 
-
-class BoardExample {
-    static int[][] example1 = {
-        {3,8,0, 1,7,0, 5,6,4},
-        {0,1,7, 0,5,0, 0,8,9},
-        {6,0,0, 0,3,8, 0,0,0},
-
-        {9,0,3, 8,0,0, 0,4,6},
-        {0,0,2, 0,0,6, 0,5,0},
-        {1,6,4, 0,0,0, 0,9,0},
-
-        {5,0,0, 7,6,3, 4,1,2},
-        {4,3,0, 2,0,9, 6,0,0},
-        {0,2,0, 5,4,0, 9,3,0}
-    };
 } 
