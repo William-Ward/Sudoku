@@ -10,7 +10,7 @@ public class SudokuBoard extends Board{
     }
 
     public boolean isComplete(){
-        if(super.getRemainingOfNumber(0) == 9){
+        if(super.getRemainingOfNumber(BLANK_SQUARE) == 9){
             return true;
         } 
         return false;
@@ -18,7 +18,7 @@ public class SudokuBoard extends Board{
 
     public ArrayList<Integer> findPossibleInCell(int row, int col){ 
         ArrayList<Integer> foundPossible = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9)); 
-        if(super.getCell(row, col) == 0){
+        if(super.getCell(row, col) == BLANK_SQUARE){
             findPossibleInList(foundPossible, super.getRow(row));
             findPossibleInList(foundPossible, super.getColumn(col));
             findPossibleInList(foundPossible, super.getCube(row, col));
@@ -30,7 +30,7 @@ public class SudokuBoard extends Board{
     public ArrayList<Integer> findPossibleInList(
            ArrayList<Integer> currentPossible, ArrayList<Integer> fromList){ 
         for(Integer e : fromList){
-            if(e != 0){
+            if(e != BLANK_SQUARE){
                 currentPossible.remove(e);
             }
         }

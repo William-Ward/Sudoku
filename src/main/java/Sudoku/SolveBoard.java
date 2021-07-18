@@ -15,6 +15,30 @@ public class SolveBoard {
         board = newboard;
     }
 
+    public void solveBoard(){
+        board.printBoard();
+        System.out.println();
+        while(!board.isComplete()){
+            findPossibleInBoard();
+            setKnownCells();
+        }
+        board.printBoard();
+    }
+
+    public void setKnownCells(){
+        int boardSize = board.getBoardSize();
+        int value = 0;
+        int first = 0;
+        for(int row = 0; row < boardSize; row = row + 1){
+            for(int col = 0; col < boardSize; col = col + 1){
+                if(scratchList.getList(row, col).size() == 1){
+                    value = scratchList.getList(row, col).get(first);
+                    this.board.setCell(value, row, col);
+                }
+            } 
+        } 
+    }
+
     public SaveList findPossibleInBoard(){
         int boardSize = board.getBoardSize();
         for(int row = 0; row < boardSize; row = row + 1){
@@ -31,15 +55,6 @@ public class SolveBoard {
         board.setCube(SolveBoard.shuffleArray(templateRow), 3, 3); 
         board.setCube(SolveBoard.shuffleArray(templateRow), 6, 6); 
     }
-
-    public static boolean rowIsComplete(ArrayList<Integer> row){
-        for(int i = 0; i < row.size(); i++){
-            if(row.get(i) == SudokuBoard.BLANK_SQUARE){ 
-                return false; 
-            }
-        }
-        return true;
-    } 
 
     public static ArrayList<Integer> shuffleArray(ArrayList<Integer> row){ 
         Collections.shuffle(row);
